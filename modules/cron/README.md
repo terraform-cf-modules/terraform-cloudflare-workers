@@ -26,25 +26,6 @@ Schedules are five field cron expressions in UTC, or one of `@hourly`, `@daily`,
 `@yearly`.
 
 <!-- BEGIN_TF_DOCS -->
-## Requirements
-
-| Name | Version |
-| ---- | ------- |
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.12.0 |
-| <a name="requirement_cloudflare"></a> [cloudflare](#requirement\_cloudflare) | ~> 5.24 |
-
-## Providers
-
-| Name | Version |
-| ---- | ------- |
-| <a name="provider_cloudflare"></a> [cloudflare](#provider\_cloudflare) | ~> 5.24 |
-
-## Resources
-
-| Name | Type |
-| ---- | ---- |
-| [cloudflare_workers_cron_trigger.this](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/workers_cron_trigger) | resource |
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |

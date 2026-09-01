@@ -65,29 +65,6 @@ The map key is the name the Worker sees on `env`. `type` decides which other fie
 `keep_bindings = ["secret_text"]` so an upload does not wipe them.
 
 <!-- BEGIN_TF_DOCS -->
-## Requirements
-
-| Name | Version |
-| ---- | ------- |
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.12.0 |
-| <a name="requirement_cloudflare"></a> [cloudflare](#requirement\_cloudflare) | ~> 5.24 |
-
-## Providers
-
-| Name | Version |
-| ---- | ------- |
-| <a name="provider_cloudflare"></a> [cloudflare](#provider\_cloudflare) | ~> 5.24 |
-
-## Resources
-
-| Name | Type |
-| ---- | ---- |
-| [cloudflare_worker.this](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/worker) | resource |
-| [cloudflare_worker_version.this](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/worker_version) | resource |
-| [cloudflare_workers_deployment.this](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/workers_deployment) | resource |
-| [cloudflare_workers_script.this](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/workers_script) | resource |
-| [cloudflare_workers_script_subdomain.this](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/workers_script_subdomain) | resource |
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |

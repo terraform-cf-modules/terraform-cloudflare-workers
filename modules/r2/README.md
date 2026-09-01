@@ -75,30 +75,6 @@ bindings = {
 `location` is only honoured the first time a bucket with a given name is created.
 
 <!-- BEGIN_TF_DOCS -->
-## Requirements
-
-| Name | Version |
-| ---- | ------- |
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.12.0 |
-| <a name="requirement_cloudflare"></a> [cloudflare](#requirement\_cloudflare) | ~> 5.24 |
-
-## Providers
-
-| Name | Version |
-| ---- | ------- |
-| <a name="provider_cloudflare"></a> [cloudflare](#provider\_cloudflare) | ~> 5.24 |
-
-## Resources
-
-| Name | Type |
-| ---- | ---- |
-| [cloudflare_r2_bucket.this](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/r2_bucket) | resource |
-| [cloudflare_r2_bucket_cors.this](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/r2_bucket_cors) | resource |
-| [cloudflare_r2_bucket_event_notification.this](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/r2_bucket_event_notification) | resource |
-| [cloudflare_r2_bucket_lifecycle.this](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/r2_bucket_lifecycle) | resource |
-| [cloudflare_r2_bucket_lock.this](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/r2_bucket_lock) | resource |
-| [cloudflare_r2_custom_domain.this](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/r2_custom_domain) | resource |
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
