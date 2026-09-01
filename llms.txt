@@ -1,0 +1,43 @@
+# Cloudflare Workers
+
+> Workers, routes, cron triggers, and the developer platform storage bindings (KV, D1, Queues, R2, Hyperdrive) plus Pages.
+
+Terraform module for Cloudflare, maintained by CloudDrove. Source: `terraform-cf-modules/workers/cloudflare`. Repository: https://github.com/terraform-cf-modules/terraform-cloudflare-workers
+
+Requires Terraform >= 1.12.0 (or OpenTofu >= 1.12) and the `cloudflare/cloudflare` provider ~> 5.24. Provider v5 renamed most resources from v4, so verify resource names against the current provider docs rather than older examples.
+
+## Usage
+
+```hcl
+module "this" {
+  source  = "terraform-cf-modules/workers/cloudflare"
+  version = "~> 0.1"
+}
+```
+
+## Submodules
+
+Each is separately addressable with the double slash source syntax.
+
+- [cron](https://github.com/terraform-cf-modules/terraform-cloudflare-workers/tree/main/modules/cron): `terraform-cf-modules/workers/cloudflare//modules/cron`
+- [d1](https://github.com/terraform-cf-modules/terraform-cloudflare-workers/tree/main/modules/d1): `terraform-cf-modules/workers/cloudflare//modules/d1`
+- [hyperdrive](https://github.com/terraform-cf-modules/terraform-cloudflare-workers/tree/main/modules/hyperdrive): `terraform-cf-modules/workers/cloudflare//modules/hyperdrive`
+- [kv](https://github.com/terraform-cf-modules/terraform-cloudflare-workers/tree/main/modules/kv): `terraform-cf-modules/workers/cloudflare//modules/kv`
+- [pages](https://github.com/terraform-cf-modules/terraform-cloudflare-workers/tree/main/modules/pages): `terraform-cf-modules/workers/cloudflare//modules/pages`
+- [queue](https://github.com/terraform-cf-modules/terraform-cloudflare-workers/tree/main/modules/queue): `terraform-cf-modules/workers/cloudflare//modules/queue`
+- [r2](https://github.com/terraform-cf-modules/terraform-cloudflare-workers/tree/main/modules/r2): `terraform-cf-modules/workers/cloudflare//modules/r2`
+- [route](https://github.com/terraform-cf-modules/terraform-cloudflare-workers/tree/main/modules/route): `terraform-cf-modules/workers/cloudflare//modules/route`
+- [script](https://github.com/terraform-cf-modules/terraform-cloudflare-workers/tree/main/modules/script): `terraform-cf-modules/workers/cloudflare//modules/script`
+
+## Documentation
+
+- [README](https://github.com/terraform-cf-modules/terraform-cloudflare-workers/blob/main/README.md): overview and usage
+- [Inputs and outputs](https://github.com/terraform-cf-modules/terraform-cloudflare-workers/blob/main/docs/io.md): every variable and output
+- [Examples](https://github.com/terraform-cf-modules/terraform-cloudflare-workers/tree/main/examples): runnable configurations
+- [Architecture](https://github.com/terraform-cf-modules/terraform-cloudflare-workers/blob/main/docs/architecture.md): resource map and provider quirks
+
+## Related
+
+- [All CloudDrove modules](https://github.com/clouddrove/toc): every module and submodule across AWS, Azure, Google Cloud, DigitalOcean, Hetzner Cloud and Cloudflare
+- [Organisation](https://github.com/terraform-cf-modules): the Cloudflare module family
+- [Terraform Registry](https://registry.terraform.io/namespaces/terraform-cf-modules)
