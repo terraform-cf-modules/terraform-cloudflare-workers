@@ -1,0 +1,165 @@
+---
+#
+# This is the canonical configuration for `README.md`.
+# Run `make docs` for the terraform-docs block, the readme workflow rebuilds the rest.
+#
+
+name: Cloudflare Workers
+
+intro: |-
+  With our comprehensive DevOps toolkit, streamline operations, automate workflows, enhance collaboration and deploy with confidence.
+
+badges_text: "Latest Release | License | Changelog"
+
+about: |-
+  Workers, routes, cron triggers, and the developer platform storage bindings (KV, D1, Queues, R2, Hyperdrive) plus Pages.
+
+license: "APACHE"
+
+github_repo: terraform-cf-modules/terraform-cloudflare-workers
+
+badges:
+  - name: "Terraform"
+    image: "https://img.shields.io/badge/Terraform-v1.10.0-green"
+    url: "https://www.terraform.io"
+
+  - name: "Licence"
+    image: "https://img.shields.io/badge/License-APACHE-blue.svg"
+    url: "LICENSE"
+
+  - name: "Changelog"
+    image: "https://img.shields.io/badge/Changelog-blue"
+    url: "CHANGELOG.md"
+
+prerequisites:
+  - name: Terraform
+    url: https://learn.hashicorp.com/terraform/getting-started/install.html
+    version: ">= 1.10.0"
+
+  - name: OpenTofu
+    url: https://opentofu.org/docs/intro/install/
+    version: ">= 1.9.0"
+
+providers:
+  - name: cloudflare
+    url: https://registry.terraform.io/providers/cloudflare/cloudflare/latest
+    version: "~> 5.24"
+
+description: |-
+  Deploys a Cloudflare Worker together with everything that has to exist around it: the routes and custom domains
+  that send traffic to it, the cron triggers that wake it on a schedule, and the KV namespaces, D1 databases,
+  Queues, R2 buckets and Hyperdrive configurations it reads and writes. Pages projects are covered too, since
+  Pages Functions share the same storage products.
+
+  The binding wiring is the point of the module. Binding a Worker to a KV namespace, a D1 database, an R2 bucket
+  and a queue by hand means copying namespace IDs and database UUIDs out of one resource into a list of untyped
+  binding objects on another, in a different shape per binding type. Here the JavaScript variable name is
+  declared once, next to the storage that backs it, and the module builds the binding list.
+
+  Submodules are published for every piece: `script`, `route`, `cron`, `kv`, `d1`, `queue`, `r2`, `hyperdrive`
+  and `pages`. Use them directly when storage and Workers are owned by different configurations.
+
+  Two deployment models are available. The default `script` model uses `cloudflare_workers_script`, which is the
+  generally available surface. Setting `deployment_model = "versioned"` switches to the beta
+  `cloudflare_worker` / `cloudflare_worker_version` / `cloudflare_workers_deployment` triple, which models the
+  versions and deployments API. See `docs/architecture.md`.
+
+  This module targets Cloudflare provider v5. Cloudflare rewrote the provider from its OpenAPI spec in v5.0.0 and
+  renamed most resources, so verify resource names and attributes against the current provider documentation
+  rather than from memory or from older examples.
+
+usage: |-
+  ### Root module
+
+  ```hcl
+  module "worker" {
+    source  = "terraform-cf-modules/workers/cloudflare"
+    version = "~> 0.1"
+
+    account_id         = var.account_id
+    zone_id            = var.zone_id
+    script_name        = "api"
+    compatibility_date = "2025-06-01"
+    content            = file("${path.module}/worker.js")
+
+    kv_namespaces = {
+      cache = { title = "api-cache", binding = "CACHE" }
+    }
+
+    d1_databases = {
+      app = { name = "api-app", binding = "DB" }
+    }
+
+    queues = {
+      jobs = {
+        queue_name = "api-jobs"
+        binding    = "JOBS"
+        consumer   = { type = "worker" }
+      }
+    }
+
+    routes = {
+      api = { pattern = "example.com/api/*" }
+    }
+
+    cron_schedules = ["*/15 * * * *"]
+  }
+  ```
+
+  ### Submodule
+
+  ```hcl
+  module "namespaces" {
+    source  = "terraform-cf-modules/workers/cloudflare//modules/kv"
+    version = "~> 0.1"
+
+    account_id = var.account_id
+
+    namespaces = {
+      sessions = { title = "sessions" }
+    }
+  }
+
+  module "worker" {
+    source  = "terraform-cf-modules/workers/cloudflare//modules/script"
+    version = "~> 0.1"
+
+    account_id  = var.account_id
+    script_name = "hello"
+    content     = file("${path.module}/worker.js")
+
+    bindings = {
+      SESSIONS = {
+        type         = "kv_namespace"
+        namespace_id = module.namespaces.namespace_ids["sessions"]
+      }
+    }
+  }
+  ```
+
+  ### Wrapper for many Workers
+
+  ```hcl
+  module "workers" {
+    source = "terraform-cf-modules/workers/cloudflare//wrappers"
+
+    defaults = {
+      account_id         = var.account_id
+      zone_id            = var.zone_id
+      compatibility_date = "2025-06-01"
+    }
+
+    items = {
+      api = {
+        script_name = "api"
+        content     = file("${path.module}/api.js")
+        routes      = { main = { pattern = "example.com/api/*" } }
+      }
+      nightly = {
+        script_name    = "nightly"
+        content        = file("${path.module}/nightly.js")
+        cron_schedules = ["0 3 * * *"]
+      }
+    }
+  }
+  ```
