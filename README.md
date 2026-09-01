@@ -6,8 +6,8 @@
 <p align="center"><em>Workers, routes, cron triggers, and the developer platform storage bindings (KV, D1, Queues, R2, Hyperdrive) plus Pages.</em></p>
 
 <p align="center">
-  <a href="https://www.terraform.io"><img src="https://img.shields.io/badge/terraform-%3E%3D%201.10-844FBA?logo=terraform&logoColor=white" alt="Terraform" /></a>
-  <a href="https://opentofu.org"><img src="https://img.shields.io/badge/opentofu-%3E%3D%201.9-FFDA18?logo=opentofu&logoColor=black" alt="OpenTofu" /></a>
+  <a href="https://www.terraform.io"><img src="https://img.shields.io/badge/terraform-%3E%3D%201.12-844FBA?logo=terraform&logoColor=white" alt="Terraform" /></a>
+  <a href="https://opentofu.org"><img src="https://img.shields.io/badge/opentofu-%3E%3D%201.12-FFDA18?logo=opentofu&logoColor=black" alt="OpenTofu" /></a>
   <a href="https://registry.terraform.io/providers/cloudflare/cloudflare/latest"><img src="https://img.shields.io/badge/provider-cloudflare%20~%3E%205.24-F38020?logo=cloudflare&logoColor=white" alt="Cloudflare Provider" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License" /></a>
 </p>
@@ -294,7 +294,7 @@ The API token needs `Workers Scripts Read` and `Workers Scripts Write`, plus `Wo
 
 | Name | Version |
 | ---- | ------- |
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.10.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.12.0 |
 | <a name="requirement_cloudflare"></a> [cloudflare](#requirement\_cloudflare) | ~> 5.24 |
 
 ## Modules
